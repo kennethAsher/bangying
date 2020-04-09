@@ -2,13 +2,20 @@
 # -*- coding: utf8 -*-
 """
 @brief :
-@author: linzx
-@file  : TestSpark.py
-@ctime : 2019/4/28 11:21
+@author: kennethAsher
+@content  : 清洗裁判文书
+@ctime : Tue Dec 17 16:56:33 CST 2019
 """
+
+
 import re
 from pyspark.sql import SparkSession
 import json
+from pyspark.sql.types import *
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 
 # 个人信息
 class Lawyer(object):
@@ -33,7 +40,6 @@ class Jutice(object):
     def __str__(self):
         return '{{"name":"{}","status":"{}","statusCode":"{}"}}'.format(self.name, self.status, self.statusCode)
 
-
 class Party(object):
     """
     """
@@ -55,7 +61,6 @@ class Party(object):
         return '{{"name":"{}","status":"{}","statusCode":"{}","isCompany":{},"lawyer":[{}]}}'. \
             format(self.name, self.status, self.statusCode, str(self.isCompany).lower(),
                    ",".join([str(x) for x in self.lawyer]))
-
 
 class LawsuitParser(object):
     def __init__(self):
@@ -86,7 +91,7 @@ class LawsuitParser(object):
 
         # 1.1 如果 r'^委托诉?讼?代理人([\(（].*[\)）])?[:：]?(.*律师)'，匹配的话，那种“xxx律师事务所”后面没有律师的会解错
         # 光写“委托诉讼代理人人 xxx”，多写个人的的就有几百个，都是sb吗 54dcc64c-5287-4154-bdb3-8ddd8dd398fa
-        self.civilLawyerExpr = r'^委托诉?讼?代理人[人]?([\(（].*[\)）])?[:：]?(.*律师(事务所)?)'
+        self.civilLawyerExpr = r'^委托诉?讼?代理[人]?([\(（].*[\)）])?[:：]?(.*律师(事务所)?)'
         self.criminalLawyerExpr = r'^辩护人[人]?([\(（].*[\)）])?[:：]?(.*律师(事务所)?)'
 
         # 解析审判人员的正则表达式  这块文字中间有可能有中英文的空格和tab,dict的value用来表示是法官还是其他身份
@@ -133,18 +138,18 @@ class LawsuitParser(object):
 
         # 修正类错误 “及附带民事诉讼代理人何智勇”
         # 修正 “辩护人辩护人王增林，贵州红连天律师事务所律师” 多个辩护人，这种错居然能一大堆。。e561346b-7630-4c5c-84dd-a84a01742f5d
-        self.lawyerSpcWordClearPat = re.compile('(.*代理人)|(辩护人)|([\(（].*?[\)）])|(律师)$|^(代理)')
+        self.lawyerSpcWordClearPat = re.compile('(.*代理人)|(.*辩护人)|([\(（].*?[\)）])|(律师)$|^(代理)')
 
         # 用来去除姓名中的一些特殊字符
         self.nameGeneralClearPat = re.compile(
             r'(&.{1,7};)|([\(（].*?[\)）])|(<.*?>)|(二[ｏﾷ◎ㅇоΟО0０Ｏ〇◯○oO零].*)|�|\+|-|\?|？|([a-zA-Z])|\"|\'|`|、|：|∶|:|;|；|=|［|］|（|）|/|_|／|<|﹤|>|﹥|&|＊|\*|\s|\d|#|○')
 
-    def parseParties(self, caseType, text):
+    def parseParties(self, casetype_name, text):
         # 根据案件类型确定 当事人身份关键词
         result = []
         statusDict = {}
         lawyerExpr = ''
-        if caseType == '刑事案件':
+        if casetype_name == '刑事案件':
             statusDict = self.criminalStatus
             lawyerExpr = self.criminalLawyerExpr
         else:
@@ -170,6 +175,7 @@ class LawsuitParser(object):
                 # (.*?)。 非贪婪模式匹配出剩下的内容
                 # 事实证明基本不可能有一个正则能直接解析这个不规范的数据。。。。
 
+                #匹配被告，被执行人等信息
                 patterm = r'^({}([\(（].*?[\)）])?)[:：]?(.*)'.format(status)
                 matchResut = re.match(patterm, line)
 
@@ -184,7 +190,7 @@ class LawsuitParser(object):
                     party.statusCode = statusTuple[0]
                     # SETP2 根据逗号解析当事人信息
                     # 注意这里group(2)是可能有可能无的，举个例子:上诉人（原审被告人）:李三XXXX.
-                    # group(1) :上诉人（原审被告人）
+                    # group(1) : 上诉人（原审被告人）
                     # group(2) :（原审被告人）        没有括号的话就是None
                     # group(3) : 李三XXXX
                     splits = re.split('\,|，|;|；|:|：|、', matchResut.group(3))
@@ -345,74 +351,172 @@ class LawsuitParser(object):
         # 默认返回基层
         return '基层'
 
+    #获取律师姓名和律师事务所，不带有律师事务所的律师本次不予考虑
+    def getLawyer(self, text):
+        lawyer_accuser_pat = r'委托诉?讼?代理[人]?([\(（].*[\)）])?[:：]?(.*律师(事务所)?)'
+        lawyer_accused_pat = r'^辩护人[人]?([\(（].*[\)）])?[:：]?(.*律师(事务所)?)'
+        laywer_names = ''
+        laywer_statuses = ''
+
+        lines = list(filter(None, self.docSplitPat.split(text)))
+        for line in lines:
+            if line == '':
+                continue
+            # 我认为在关键数据行里的tab，空格，\都是没有意义的，替换掉。不然会导致后面生成json报错。不过感觉会有坑。。
+            line = re.sub(r'\s|\\', '', line)
+            matchResut = re.match(lawyer_accuser_pat, line)
+            if matchResut is not None:
+                # 干你娘：把括号里的内容都拿掉,我认为括号里的东西都是可有可无的，解决这种问题：委托代理人彭传成（代理权限：特别授权，即代为调查、出庭、诉讼，代为承认、放弃诉讼请求，进行和解，提起反诉、上诉，代收代签法律文书），随县小林法律服务所法律工作者。
+                lawyerStr = re.sub(r'[\(（].*?[\)）]', '', matchResut.group(0))
+
+                # 解析出来的结果可能 律师A,律师B，(均系或者系)XXX律所 ，两个律师之间可能是逗号，也可能是顿号，甚至分号
+                lawyers = list(filter(None, re.split(r'\,|，|、|;|；|：|：', lawyerStr)))
+
+                # filter以后可能是空
+                if len(lawyers) == 0:
+                    break
+
+                # 如果是“xxx律师事务所律师”这种格式，把最后的律师两个字去掉,把前面的“系”“均系”也去掉
+                # 有个特别烦的“均为广东共阳律师事务所律师及律师助理”
+                lawyers[-1] = re.sub(r'^(分别|均|都)?(系|为|是)|(律师)?(及|和|、)?(实习|助理|执业|兼职|专职|职业|指派|指定)?律师$|法律工作者$', '', lawyers[-1])
+
+                # 最后只写律师事务，丢了“所”的。这种记录很多，丢雷楼母
+                lawyers[-1] = re.sub(r'律师事务$', '律师事务所', lawyers[-1])
+
+                if len(lawyers) > 1:  # 带律所
+                    # 最多有两个代理律师，多的话肯定是有格式不规范的，所以这里只取前俩
+                    for x in lawyers[0:-1 if len(lawyers) < 4 else 2]:
+                        # 尽量过滤一下已知的错误,如果第二个字段是性别
+                        if x == '男' or x == '女':
+                            break
+                        # 第二个字段是生日 ,居然还有 “X年X月X日出生” 原文就是x年。。不是具体的数值。。。。我tm。。。
+                        if re.match(r'.*[1-9].*', x) is not None or re.match(r'.*年.*月.*日.*', x) is not None:
+                            break
+                        lawyerName = x
+                        # 去除一些修饰词组
+                        if len(lawyerName) > 3:
+                            # 很多书写不正规导致的常见错误过滤
+                            if self.lawyerFilterPat.match(lawyerName) is not None:
+                                break
+                            lawyerName = self.lawyerSpcWordClearPat.sub('', lawyerName)
+
+                        lawyerName = self.nameGeneralClearPat.sub('', lawyerName)
+                        if lawyerName != '':
+                            laywer_names = laywer_names + lawyerName + ','
+                            laywer_statuses = laywer_statuses + lawyers[-1] + ','
+                return laywer_names[:-1], laywer_statuses[:-1]
+
+            matchResut = re.match(lawyer_accuser_pat, line)
+            if matchResut is not None:
+                # 干你娘：把括号里的内容都拿掉,我认为括号里的东西都是可有可无的，解决这种问题：委托代理人彭传成（代理权限：特别授权，即代为调查、出庭、诉讼，代为承认、放弃诉讼请求，进行和解，提起反诉、上诉，代收代签法律文书），随县小林法律服务所法律工作者。
+                lawyerStr = re.sub(r'[\(（].*?[\)）]', '', matchResut.group(0))
+
+                # 解析出来的结果可能 律师A,律师B，(均系或者系)XXX律所 ，两个律师之间可能是逗号，也可能是顿号，甚至分号
+                lawyers = list(filter(None, re.split(r'\,|，|、|;|；|：|：', lawyerStr)))
+
+                # filter以后可能是空
+                if len(lawyers) == 0:
+                    break
+
+                # 如果是“xxx律师事务所律师”这种格式，把最后的律师两个字去掉,把前面的“系”“均系”也去掉
+                # 有个特别烦的“均为广东共阳律师事务所律师及律师助理”
+                lawyers[-1] = re.sub(r'^(分别|均|都)?(系|为|是)|(律师)?(及|和|、)?(实习|助理|执业|兼职|专职|职业|指派|指定)?律师$|法律工作者$', '',
+                                     lawyers[-1])
+
+                # 最后只写律师事务，丢了“所”的。这种记录很多，丢雷楼母
+                lawyers[-1] = re.sub(r'律师事务$', '律师事务所', lawyers[-1])
+
+                if len(lawyers) > 1:  # 带律所
+                    # 最多有两个代理律师，多的话肯定是有格式不规范的，所以这里只取前俩
+                    for x in lawyers[0:-1 if len(lawyers) < 4 else 2]:
+                        # 尽量过滤一下已知的错误,如果第二个字段是性别
+                        if x == '男' or x == '女':
+                            break
+                        # 第二个字段是生日 ,居然还有 “X年X月X日出生” 原文就是x年。。不是具体的数值。。。。我tm。。。
+                        if re.match(r'.*[1-9].*', x) is not None or re.match(r'.*年.*月.*日.*', x) is not None:
+                            break
+                        lawyerName = x
+                        # 去除一些修饰词组
+                        if len(lawyerName) > 3:
+                            # 很多书写不正规导致的常见错误过滤
+                            if self.lawyerFilterPat.match(lawyerName) is not None:
+                                break
+                            lawyerName = self.lawyerSpcWordClearPat.sub('', lawyerName)
+
+                        lawyerName = self.nameGeneralClearPat.sub('', lawyerName)
+                        if lawyerName != '':
+                            laywer_names = laywer_names + lawyerName + ','
+                            laywer_statuses = laywer_statuses + lawyers[-1] + ','
+                return laywer_names[:-1], laywer_statuses[:-1]
+
+            return '',''
+
+
+
+
     def parseLawsuit(self, dataFrame):
         parties = []
         justices = []
         flag = 0
-        # plaintext without html
-        text = ''
-        if dataFrame.plaintext is not None:
-            # 直接通过这个htmlRemovePat会出现问题，有的时候不正规的正文会出现<>,如docid =e0f19260-9c17-4a41-a885-a92d00a047b9
-            # 加个判断div和html,确保是含有html格式的再去替换，但是如果既有html格式，正文还有有意义的<>，那就没办法了
-            if dataFrame.plaintext.find('<div') > 0 \
-                    or dataFrame.plaintext.find('html') > 0 \
-                    or dataFrame.plaintext.find('font-') > 0 \
-                    or dataFrame.plaintext.find('span>') > 0 \
-                    or dataFrame.plaintext.find('<style') > 0:
-                text = '\n'.join(self.htmlRemovePat.findall(dataFrame.plaintext))
-                text = re.sub(r'<br/>', '\n', text)
-                text = re.sub(r'\n+', '\n', text)
-                # 神族专用
-                text = re.sub(r'&middot;', '·', text)
-            else:
-
-                text = dataFrame.plaintext
+        # # mainbody without html
+        # text = ''
+        # if dataFrame.mainbody is not None:
+        #     # 直接通过这个htmlRemovePat会出现问题，有的时候不正规的正文会出现<>,如docid =e0f19260-9c17-4a41-a885-a92d00a047b9
+        #     # 加个判断div和html,确保是含有html格式的再去替换，但是如果既有html格式，正文还有有意义的<>，那就没办法了
+        #     if dataFrame.mainbody.find('<div') > 0 \
+        #             or dataFrame.mainbody.find('html') > 0 \
+        #             or dataFrame.mainbody.find('font-') > 0 \
+        #             or dataFrame.mainbody.find('span>') > 0 \
+        #             or dataFrame.mainbody.find('<style') > 0:
+        #         text = '\n'.join(self.htmlRemovePat.findall(dataFrame.mainbody))
+        #         text = re.sub(r'<br/>', '\n', text)
+        #         text = re.sub(r'\n+', '\n', text)
+        #         # 神族专用
+        #         text = re.sub(r'&middot;', '·', text)
+        #     else:
+        #
+        #         text = dataFrame.mainbody
         # 干掉html转义符,比如 &#12295;  还有一个特殊字符�,
-        text = self.spcSigClearPat.sub('', text)
-        if dataFrame.partyinfo is not None:
-            # 如果partyinfo不是空，则根据partyinfo去解
-            parties = self.parseParties(dataFrame.casetype, self.spcSigClearPat.sub('', dataFrame.partyinfo))
-            if len(parties) > 0:
-                flag = 1
-        # 如果partyinfo是空，或者根据partyinfo没有解出来，尝试用plaintext去解一下
-        if flag == 0 and text != '':
-            parties = self.parseParties(dataFrame.casetype, text)
-            if len(parties) > 0:
-                flag = 2
+        text = self.spcSigClearPat.sub('', dataFrame.mainbody).encode('utf8')
+        # if dataFrame.partyinfo is not None:
+        #     # 如果partyinfo不是空，则根据partyinfo去解
+        #     parties = self.parseParties(dataFrame.casetype_name, self.spcSigClearPat.sub('', dataFrame.partyinfo))
+        #     if len(parties) > 0:
+        #         flag = 1
+        # 如果partyinfo是空，或者根据partyinfo没有解出来，尝试用mainbody去解一下
+        # if flag == 0 and text != '':
+        #     parties = self.parseParties(dataFrame.casetype_name, text)
+        #     if len(parties) > 0:
+        #         flag = 2
 
-        if dataFrame.tail is not None:
-            # 尝试用tail解析一下审判人员信息
-            justices = self.reverseParseJustices(self.spcSigClearPat.sub('', dataFrame.tail))
-            if len(justices) > 0:
-                flag += 10
-        # 如果 dataFrame.tail是空，后者根据tail解不出审判人员信息，尝试用plaintext去解一下，
+
+        #修改
+        if text != "":
+            lawyer_name, lawyer_status = self.getLawyer(text)
+
+
+
+
+        # if dataFrame.mainbody is not None:
+        #     # 尝试用tail解析一下审判人员信息
+        #     justices = self.reverseParseJustices(self.spcSigClearPat.sub('', text))
+        #     if len(justices) > 0:
+        #         flag += 10
+        # 如果 dataFrame.tail是空，后者根据tail解不出审判人员信息，尝试用mainbody去解一下，
         # 这里其实最好能跟前面解partyinfo合一起，这样一次遍历就行，不过逻辑不太好合，先这样吧
-        if flag // 10 == 0 and text != '':
-            justices = self.reverseParseJustices(text)
-            if len(justices) > 0:
-                flag += 20
+        # if flag // 10 == 0 and text != '':
+        #     justices = self.reverseParseJustices(text)
+        #     if len(justices) > 0:
+        #         flag += 20
         # 时间格式各种各样，想办法统一一下
-        judgeTime = ''
-        if dataFrame.judgetime is not None:
-            judgeTime = re.sub('[^0-9]', '', dataFrame.judgetime)
-        return [dataFrame.docid,
-                dataFrame.title,
-                dataFrame.caseno,
-                dataFrame.originalcasereason,
-                dataFrame.casereason,
-                dataFrame.trialprocedure,
-                judgeTime[0:4],
-                judgeTime[0:6],
-                judgeTime,
-                dataFrame.court,
-                dataFrame.courtlevel if dataFrame.courtlevel is not None else self.parseCourtLvl(dataFrame.court),
-                dataFrame.province,
-                dataFrame.city,
-                dataFrame.region,
-                dataFrame.casetype,
-                dataFrame.doctype,
-                text,
-                flag,
+        # trialdate = ''
+        # if dataFrame.trialdate is not None:
+        #     trialdate = re.sub('[^0-9]', '', dataFrame.trialdate)
+        return [dataFrame.casetypename,
+                dataFrame.trialdate,
+                dataFrame.court_name,
+                dataFrame.trialround_name,
+                dataFrame.actioncause_name,
                 parties,
                 justices]
 
@@ -421,107 +525,31 @@ class LawsuitParser(object):
             print(party)
 
 
-if __name__ == "__main__":
-    # .config("spark.dynamicAllocation.enabled", False) \
-    # .config("spark.yarn.jars","hdfs://emr-cluster/spark_jars") \
+if __name__ == '__main__':
+    parser = LawsuitParser()
     spark = SparkSession \
         .builder \
         .appName("PartyInfoParser") \
         .config("spark.sql.warehouse.dir", "/user/hive/warehouse") \
-        .config("spark.debug.maxToStringFields",1024*1024*10) \
+        .config("spark.debug.maxToStringFields", 1024 * 1024 * 10) \
         .config("spark.sql.parquet.output.committer.class", "org.apache.parquet.hadoop.ParquetOutputCommitter") \
         .enableHiveSupport() \
         .getOrCreate()
-    spark.sql("use pgdata")
-    spark.sql("show tables").show()
-    #设置日志级别
-    spark.sparkContext.setLogLevel("INFO")
-    print("#"*100)
-    print(spark.sparkContext.getConf().getAll())
 
-    df = spark.sql("select distinct t2.lawsuit_uuid as uuid,"
-                   "   t2.jd_case_reason as originalcasereason,"
-                   "   case when t2.jd_case_reason ='合同纠纷' then t2.jd_case_reason "
-                   "   when t2.jd_case_reason ='知识产权合同纠纷' then t2.jd_case_reason "  
-                   "   when t3.cause_of_action_2 like '%合同纠纷%' "
-                   "   then nvl(t3.cause_of_action_3,t3.cause_of_action_2) "
-                   "   ELSE t3.cause_of_action_2 end  as  casereason "
-                   "   from company_lawsuit_parsed_info  t2 "
-                   "       left OUTER join pg_sm_cause_of_action t3 "
-                   "       on (t2.jd_case_reason=t3.cause_of_action_2 "
-                   "       or t2.jd_case_reason=t3.cause_of_action_3 "
-                   "       or t2.jd_case_reason=t3.cause_of_action_4 )")
-    print("partion===={}".format(df.rdd.getNumPartitions()))
-    df.createOrReplaceTempView("tv_case")
+    schema = StructType([
+        StructField("casetypename", StringType(), True),
+        StructField("trialdate", StringType(), True),
+        StructField("court_name", StringType(), True),
+        StructField("trialround_name", StringType(), True),
+        StructField("actioncause_name", StringType(), True),
+        StructField("parties", StringType(), True),
+        StructField("justices", StringType(), True)
+    ])
 
-    df = spark.sql("select t1.docid as docid,"
-                   "t1.title as title,"
-                   "t1.caseno as caseno,"
-                   "t1.trialprocedure as trialprocedure,"
-                   "t1.judgetime as judgetime,"
-                   "t1.court as court,"
-                   "t1.casetype as casetype,"
-                   "t1.doctype as doctype,"
-                   "t1.partyinfo as partyinfo,"
-                   "t1.tail as tail,"
-                   "t1.plaintext as plaintext,"
-                   "tc.originalcasereason as originalcasereason,"
-                   "tc.casereason as casereason "
-                   " from company_lawsuit t1 "
-                   " left outer join "
-                   "  tv_case as tc "
-                   " on (t1.uuid=tc.uuid)")
-    print("partion===={}".format(df.rdd.getNumPartitions()))
-    df.createOrReplaceTempView("tv_pg_ws_parsed")
+    test_df = spark.sql("select substr(casetypename,2) as casetypename, mainbody, trialdate, court_name, trialround_name, actioncause_name from judrisk.judrisk_lawsuit_copy")
+    # spark = SparkSession.builder.master("spark://emr-header-1:7077").appName("test").getOrCreate()
+    testDF = spark.createDataFrame(test_df.rdd.map(lambda x: parser.parseLawsuit(x)), schema=schema)
 
-    # 尝试根据法院名称完全匹配
-    df = spark.sql("select t1.docid as docid,"
-                   "t1.title as title,"
-                   "t1.caseno as caseno,"
-                   "t1.trialprocedure as trialprocedure,"
-                   "t1.judgetime as judgetime,"
-                   "t1.court as court,"
-                   "t1.casetype as casetype,"
-                   "t1.doctype as doctype,"
-                   "t1.partyinfo as partyinfo,"
-                   "t1.tail as tail,"
-                   "t1.plaintext as plaintext,"
-                   "t1.originalcasereason as originalcasereason,"
-                   "t1.casereason as casereason ,"
-                   "ci.courtlevel as courtlevel,"
-                   "ci.province as province,"
-                   "ci.cityname as city,"
-                   "ci.countyname as region "
-                   "from tv_pg_ws_parsed t1 "
-                   "  left outer join pg_court_info_bak ci on (t1.court=ci.courtname)")
-    print("partion===={}".format(df.rdd.getNumPartitions()))
-    # 创建解析器
-    parser = LawsuitParser()
-    # 解析当事人信息
-    newdf = spark.createDataFrame(df.rdd.map(lambda x: parser.parseLawsuit(x)),
-                                  ['docid',
-                                   'title',
-                                   'caseno',
-                                   'originalcasereason',
-                                   'casereason',
-                                   'trialprocedure',
-                                   'judgeyear',
-                                   'judgemonth',
-                                   'judgetime',
-                                   'court',
-                                   'courtlevel',
-                                   'province',
-                                   'city',
-                                   'region',
-                                   'casetype',
-                                   'doctype',
-                                   'plaintext',
-                                   'flag',
-                                   'parties',
-                                   'justices'])
-    newdf.repartition(500)
-    # 将结果写hive表
-    newdf.write.mode("overwrite").saveAsTable("pg_ws_parsed")
-
+    testDF.write.mode("overwrite").saveAsTable("judrisk.judrisk_lawsuit_1")
 
     spark.stop()
