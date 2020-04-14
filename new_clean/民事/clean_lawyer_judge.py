@@ -58,8 +58,8 @@ def get_judges(judge_types, judges):
     type_judge = ''
     flag = len(fields_judge) if len(fields_judge) < len(fields_type) else len(fields_type)
     for i in range(flag):
-        # if len(fields_judge[i])<2:
-        #     continue
+        if len(fields_judge[i])<2:
+            continue
         type_judge = type_judge + ',' + fields_type[i] + '-' + fields_judge[i]
     return type_judge[1:]
 
@@ -70,16 +70,19 @@ def write_lawyer_judge(open_dir, write_dir, names):
     file_write = open(write_dir, 'w', encoding='utf8')
     for step, name in enumerate(names):
         logging.info('执行第{}个文件{}'.format(step, name))
-        file_open = open('{}{}'.format(open_dir,name), 'r', encoding='utf8')
+        file_open = open('{}{}'.format(open_dir,name), 'r', encoding='utf-8')
         for line in file_open.readlines():
+            #因为提取的时候将换行替换成了了'。'，所以在文书可能连续出现多个句号，此处需要将这些替换掉
             line = htmlRemovePat.sub('', line)
+            line_judge = line.replace('。。。。。', '').replace('。。。。', '').replace('。。。', '').replace('。。', '').replace('\n','')
             judges = ''
             type_judge = ''
             doc_num = line.split('|')[0]
             lines = docSplitPat.split(line)
-            # 清洗审判人员
+            lines_judge = docSplitPat.split(line_judge)
+            # 清洗审判人员,遍历最后三行，原本遍历一行，但是会出现附文本（有审判员、书记员著名）会干扰到结果导致最终没有审判员
             i=0
-            for line in reversed(lines):
+            for line in reversed(lines_judge):
                 line = line.strip()
                 if juticesPat.findall(line) is not None:
                     line = re.sub(r'\s|\\|([\(（].*?[\)）])|(\{.*?\})|([\[【].*?[\]】])|\?|？|　', '', line)
@@ -110,7 +113,11 @@ def write_lawyer_judge(open_dir, write_dir, names):
                     if len(judge_types)<2:
                         continue
                     type_judge = get_judges(judge_types,judges[:-1])
-                    break
+                    if len(type_judge)>10:
+                        break
+                    if i ==3 :
+                        break
+                    i = i+1
             # 清洗律师
             name_list = []
             friends = ""
