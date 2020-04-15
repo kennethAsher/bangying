@@ -8,23 +8,42 @@
 '''
 
 import re
-#切分法院的正则
-court_split_pat = re.compile(r'/|—||e|;|]|\)|\?|”|号|1|2|3|4|5|6|7|8|9|0|，|：|\+|`|（|＋'
-                             r'||－|笔录|A;|判决|纠纷|签发|爱欣|我|意见|存档|判长|易忠东'
-                             r'|抄送|期间内|份数|审批栏|判决|底端|年月日|仿宋|宋体|﹥')
-court_clean_pat = re.compile(r'　| |SHAPE\*MERGEFORMAT|PAGE|ˎ̥|E\*MERGEFORMAT|_')
-data_open = open('/Users/by-webqianduan/data/court/data','r', encoding='utf8')
-court_open = open('/Users/by-webqianduan/Documents/pg_data/pg_court.txt','r', encoding='utf8')
-data_write = open('/Users/by-webqianduan/data/court/data_write','w', encoding='utf8')
+import jieba
 
-court_set = set()
-for line in court_open.readlines():
-    court_set.add(line.strip())
-flag=0
-for line in data_open.readlines():
-    clean_court = court_clean_pat.sub('',line.strip().split('|')[0])
-    court = court_split_pat.split(clean_court)[-1].replace('黑黑','黑').replace('广广','广')
-    if court not in court_set:
-        data_write.write(court+'\n')
+plaintiff_lawsuit_pat = re.compile(r'.*(原审原告|原告人|原告|上诉人|申诉人|再审申请人|申请人|申请执行人|异议人|起诉人|申报人|原审第三人|第三人).*(诉讼|请求|诉请|诉称).*')
+# 被告诉求
+appellee_lawsuit_pat = re.compile(r'.*((原审被告|被告人|被告|被上诉人|被申诉人|申请再审人|被申请人|被执行人|被异议人)|一审法院).*(答辩|反诉|诉讼|请求|诉请|诉称|认为).*')
+# 法院认为中断
+court_end_pat = re.compile(r'.*本院认为.*')
+# 法院判决
+court_lawsuit_pat = re.compile(r'.*(判决如下|裁决如下|裁定如下).*')
+
+line = '原告赵某及委托诉讼代理人李某，被告吕某及恒泰公交公司委托诉讼代理人王某、被告人保泾川支公司委托诉讼代理人张某2均到庭参加了诉讼。'
+read_flag = 1
+if court_lawsuit_pat.match(line) is not None:
+    read_flag = 4
+if appellee_lawsuit_pat.match(line) is not None:
+    read_flag = 3
+if plaintiff_lawsuit_pat.match(line) is not None:
+    read_flag = 2
+if court_end_pat.match(line) is not None:
+    read_flag = 1
+if read_flag == 4:
+    print(4)
+if read_flag == 3:
+    print(3)
+if read_flag == 2:
+    print(2)
 
 
+
+'''
+
+# plaintiff_lawsuit_pat = re.compile(r'(原审原告|原告人|原告|上诉人|申诉人|再审申请人|申请人|申请执行人|异议人|起诉人|申报人|原审第三人|第三人).*(诉讼|请求|诉请|诉称)')
+# line = '原告赵某向本院提出诉讼请求：'
+# print(plaintiff_lawsuit_pat.findall(line))
+
+# line = '鉴定费1500.00元'
+# out = jieba.lcut(line)
+# print(out)
+    '''
