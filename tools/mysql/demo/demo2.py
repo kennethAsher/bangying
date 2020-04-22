@@ -18,11 +18,11 @@ logging.basicConfig(filename='../../../log/mysql/demo/demo2.log',
 
 class demo2():
     def __init__(self):
-        self.file_path = '/Users/by-webqianduan/Downloads/data'
+        self.file_path = 'C:\\Users\\GG257\\OneDrive\\sublime\\帮瀛\\pg_data\\new_pg_court.txt'
         self.conn = pymysql.connect(host='rm-2zet9m2x33kh23506o.mysql.rds.aliyuncs.com',
                                user='pg_db',
                                password='ds930$232aH!@#FD',
-                               db='pg_simulate',
+                               db='pg_test',
                                charset='utf8')
 
     def get_conn(self):
@@ -44,12 +44,16 @@ class demo2():
             fields = line.strip().split('|')
             if len(fields)<2:
                 continue
-            court_id = int(fields[1])
-            court_name = fields[0]
-            # print(line)
-            sql = "insert into court_map(court_id, court_map_name) values('{}','{}')".format(court_id, court_name)
-            cursor.execute(sql)
-            self.conn.commit()
+            try:
+                court_id = int(fields[1])
+                court_name = fields[0]
+                # print(line)
+                sql = "insert into court_map(court_id, court_map_name) values('{}','{}')".format(court_id, court_name)
+                cursor.execute(sql)
+                self.conn.commit()
+            except:
+                print(line)
+
         cursor.close()
 
     def run(self):
