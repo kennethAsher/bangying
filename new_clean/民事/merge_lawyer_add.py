@@ -69,7 +69,7 @@ class demo():
                 if len(judges) > 0:
                     names = judges.split(',')
                     for name in names:
-                        out_line = name+'|'+self.add_map[key]+'\n'
+                        out_line = key + '|' + name+'|'+self.add_map[key]+'\n'
                         file_out.write(out_line)
             file_open.close()
         file_out.close()
