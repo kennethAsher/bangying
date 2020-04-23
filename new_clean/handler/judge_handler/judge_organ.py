@@ -32,7 +32,7 @@ class judge_organ():
         for line in file_open.readlines():
             fields = self.get_fields(line)
             id = fields[0]
-            value = fields[2]+'|'+fields[3]+'|'+fields[4]+'|'+fields[5]
+            value = fields[1]+'|'+fields[2]+'|'+fields[3]+'|'+fields[4]+'|'+fields[5]
             self.id_info_map[id] = value
         file_open.close()
 
@@ -68,7 +68,7 @@ class judge_organ():
                     continue
                 id = str(self.name_id_map[court])
                 value = self.id_info_map[id]
-                out_line = line.strip()+'|'+value+'\n'
+                out_line = fields[0] +'|'+ fields[1] +'|'+ value +'|'+ fields[3] +'|'+ fields[4] +'|'+ fields[5] + '\n'
                 file_write.write(out_line)
             file_open.close()
             file_write.close()

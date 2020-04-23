@@ -34,11 +34,10 @@ class judge_court_level():
                 doc_id = fields[0]
                 judge_name = fields[1]
                 court_name = fields[2]
-                year = fields[3]
-                date = fields[4]
-                level = fields[9]
+                year = fields[7]
+                date = fields[8]
+                level = fields[6]
                 out_line = doc_id+'|'+judge_name+'|'+court_name+'|'+year+'|'+date+'|'+level+'\n'
-
                 if '最高' in level:
                     write_level_3.write(out_line)
                 elif '高级' in level:
