@@ -13,7 +13,7 @@ class judge_organ():
     def __init__(self):
         self.pg_court_path = 'C:\\Users\\GG257\\OneDrive\\sublime\\帮瀛\\pg_data\\pg_court\\pg_court.txt'
         self.court_map_path = 'C:\\Users\\GG257\\OneDrive\\sublime\\帮瀛\\pg_data\\pg_court\\court_map_4.22.txt'
-        self.judge_dir = 'D:\\judge_data\\organ_data\\'
+        self.judge_dir = 'D:\\judge_data\\organ_data_docid\\'
         self.judge_info_path = 'D:\\judge_data\\judge_add_court\\'
         self.id_info_map = {}
         self.name_id_map = {}
@@ -63,7 +63,7 @@ class judge_organ():
             print('开始遍历文件{}'.format(name))
             for line in file_open.readlines():
                 fields = self.get_fields(line)
-                court = fields[1]
+                court = fields[2]
                 if court not in self.name_id_map:
                     continue
                 id = str(self.name_id_map[court])
