@@ -1,6 +1,6 @@
 """
 @author : kennethAsher
-@fole   : judge_name_merge.py
+@fole   : judge_out_info.py
 @ctime  : 2020/4/23 13:14
 @Email  : 1131771202@qq.com
 @content: 整理审判人员，最终得到直接放入pg_user_judge的数据
@@ -9,7 +9,7 @@
 import os
 
 
-class judge_name_merge():
+class judge_out_info():
     def __init__(self):
         self.input_path = 'D:\\judge_data\\judge_add_court\\'
         self.output_path = 'D:\\judge_data\\judge_info\\judge_info'
@@ -55,24 +55,23 @@ class judge_name_merge():
     def write_file(self):
         names = self.get_names(self.input_path)
         file_write = open(self.output_path, 'w', encoding='utf8')
+        _set = set()
         for name in names:
             file_open_now = open('{}{}'.format(self.input_path, name), 'r', encoding='utf8')
             print('writing out file {} to file'.format(name))
-            _set = set()
             for line in file_open_now.readlines():
                 fields = self.get_fields(line)
                 key = fields[1] + '|' + fields[2]
                 level = fields[6]
                 if key not in _set:
-                    start_year = self.mapping_start[key]
+                    start_year = '2010' if self.mapping_start[key] == '0000' else self.mapping_start[key]
                     end_year = self.mapping_end[key]
                     count = self.mapping_count[key]
                     trail = self.mapping_trial[key]
                     last_count = self.mapping_last_count[key]
                     out_line = key + '|' + level + '|' + start_year + '|' + end_year + '|' + str(count) + '|' + str(
                         last_count) + '|' + trail + '\n'
-                    if count > 3:
-                        file_write.write(out_line)
+                    file_write.write(out_line)
                     _set.add(key)
             file_open_now.close()
         file_write.close()
@@ -84,5 +83,5 @@ class judge_name_merge():
         self.write_file()
 
 if __name__ == '__main__':
-    judge_name_merge = judge_name_merge()
-    judge_name_merge.run()
+    judge_out_info = judge_out_info()
+    judge_out_info.run()

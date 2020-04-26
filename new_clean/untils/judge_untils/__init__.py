@@ -8,6 +8,15 @@
 
 ''':arg
 judge_organ:        将审判人员数据和法院数据合并
-judge_court_level:  将审判人员按照法院层级分类，并且最终保留层级，日期，法院名称字段
+judge_out_info:     清洗审判人员的详细信息，能够直接放入到pg_user_judge表中
 
+合并档案：
+juege_merge:        合并审判人员档案
+
+
+
+过期：
+judge_court_level:  将审判人员按照法院层级分类，并且最终保留层级，日期，法院名称字段
 '''
+
+
