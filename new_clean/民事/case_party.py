@@ -7,12 +7,16 @@
 # @Content : 清洗民事判决书，代码能够实现从裁判文书中找到原告，被告，以及案由--针对民事裁定书
 清洗出来的当事人有的为空，处理的时候需要注意一下
 清洗出来会有当事人为委托人，注意一下"被上诉人-共同委托诉讼代理人欧"
+存在乱码需要处理        ：为离���纠纷
+本次操作将有乱码的数据直接舍弃
+
 '''
 
 import re
 import os
 import logging
 
+# logging.basicConfig(filename='D:\\cause_data\\cause_party.log',
 logging.basicConfig(filename='/mnt/disk1/log/python/minshi/cause_party.log',
                     filemode="w",
                     format="%(asctime)s %(name)s:%(levelname)s:%(message)s",
@@ -27,7 +31,7 @@ cause_pat = re.compile(r'(.*?)一案')
 # 在完整句子中切分出当事人
 name_split = re.compile(r',|，')
 # 清洗当事人名称
-clean_party_pat = re.compile(r'：|\?|:')
+clean_party_pat = re.compile(r'：|\?|:|˙|；|1|2|3|4|5|6|7|8|9')
 # 匹配到当事人
 parties_pat = re.compile(r'((原审原告|原审被告|原告人|被告人|原告|被告|被上诉人|上诉人|原审第三人|第三人|被申诉人|申诉人'
                          r'|再审申请人|申请再审人|被申请人|申请人|申请执行人|被执行人|被异议人|异议人|起诉人|申报人)([\(（].*?[\)）])?)[:：]?(.*)')
@@ -38,6 +42,7 @@ parties_split_pat = re.compile(r'原审原告|原审被告|原告人|被告人|�
 htmlRemovePat = re.compile('>(.*?)<')
 
 def get_set():
+    # file_o = open('D:\\cause_data\\pg_sm_cause_of_action.txt', 'r', encoding='utf8')
     file_o = open('/mnt/disk2/utils_data/pg_sm_cause_of_action.txt', 'r', encoding='utf8')
     set1 = set()
     set2 = set()
@@ -103,16 +108,23 @@ def write_result(open_dir, write_path, names):
                         split_word = split_word + '|' + name
                     if name.endswith('户') and len(name) > 2:
                         name = name.replace('户', '')
+                    if ',' in name :
+                        name = name.split(',')[0]
+                    #有的会多余显示被告人张三、李四、王五共同上诉（在前面已经显示完成的情况下）
+                    #有的会显示被告人：共同委托代理人XXX
+                    if '、' in name or '委托' in name or '诉讼' in name or '代理人' in name or '��' in name or 'Ｘ' in name or '职工' in name or len(name)>30:
+                        continue
                     party_line = party_line + ',' + party_type + '-' + name
                 if '一案' in fields[i]:
                     try:
                         split_word_pat = re.compile(r'{}'.format(split_word[1:]))
                         cause = cause_pat.findall(remove_parent)
-                        if len(cause) == 0 or '姓名或名称' in fields[i] or '':
+                        if len(cause) == 0 or '姓名或名称' in fields[i] :
                             cause_name = ''
                         else:
                             cause_name = split_word_pat.split(cause[0])[-1]
-                            cause_name = get_cause(cause_name)
+                            cause_name = cause_name[1:] if (cause_name.startswith('为') and cause_name.endswith('纠纷')) else cause_name
+                            cause_name = get_cause(cause_name) if '��' not in cause_name else ''
                     except:
                         if len(party_line)>2:
                             file_write.write(lines[0]+'||'+party_line[1:]+'\n')
@@ -136,4 +148,6 @@ def run(open_dir, write_path):
 if __name__ == '__main__':
     open_dir = '/mnt/disk2/data/minshi/organ_data/'
     write_path = '/mnt/disk2/data/minshi/cause_party/cause_party_case'
+    # open_dir = 'D:\\cause_data\\organ_data\\'
+    # write_path = 'D:\\cause_data\\cause_party\\cause_party_case'
     run(open_dir, write_path)

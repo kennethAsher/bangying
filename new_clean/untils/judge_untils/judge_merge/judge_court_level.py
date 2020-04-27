@@ -1,6 +1,6 @@
 """
 @author : kennethAsher
-@fole   : judge_court_level.py
+@fole   : JudgeInfoResult.py
 @ctime  : 2020/4/22 19:22
 @Email  : 1131771202@qq.com
 @content: 将审判人员按照法院层级分类，并且最终保留层级，日期，法院名称以及文书的位移标识id字段

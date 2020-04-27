@@ -3,7 +3,10 @@
 @fole   : JudgeUpgrade.py
 @ctime  : 2020/4/24 13:52
 @Email  : 1131771202@qq.com
-@content: 将已经升级的审判人员分离出来
+@content:
+        上面对应着各层次名称合并之后的数据
+        将升级的审判人员数据（即名称相同的数据）单独输出
+        然后将符合条件升级的审判人员单独输出至文件judge_upgrade中
 """
 
 import os

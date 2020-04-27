@@ -44,6 +44,6 @@ for line in upgrade_open.readlines():
         set_trail.add(v)
     trail = '-'.join(set_trail)
     out_line = values[0]+'|'+values[1]+'|'+values[2]+'|'+fields[3]+'|'+values[4]+'|'+all_cnt+'|'+last_cnt+'|'+trail
-    out_line_relation = out_line + '|' + fields[0] + '|' + fields[1]
+    out_line_relation = line.strip() + '|' + values[0]+'|'+values[1]
     upgrede_write_file.write(out_line+'\n')
     upgrade_write_file_relation.write(out_line_relation + '\n')

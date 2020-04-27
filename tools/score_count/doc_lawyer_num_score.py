@@ -9,7 +9,7 @@
 import datetime
 import re
 
-government_pat = re.compile(r'.*(委|办公室|局|会|办|政协|部|政府|党校|部朝阳大街|信|中心|委银州区|厅|史馆|科学院|科院|事馆)$')
+government_pat = re.compile(r'.*(委|办公室|局|会|办|政协|部|政府|党校|部朝阳大街|信|中心|委银州区|厅|史馆|科学院|科院|事馆|处)$')
 
 file_case = open('/Users/kenneth-mac/data/lawyer_separate_out/xaf_1', 'r', encoding='utf8')
 file_out = open('/Users/kenneth-mac/data/merge_out', 'w', encoding='utf8')

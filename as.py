@@ -8,3 +8,8 @@
 '''
 
 
+import time
+for i in range(101):
+    # time.sleep(0.5)
+    print('\r当前进度：{0}{1}%'.format('▉'*i,i), end='')
+print('加载完成！')

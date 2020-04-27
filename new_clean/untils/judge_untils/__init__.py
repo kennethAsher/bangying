@@ -9,10 +9,12 @@
 ''':arg
 judge_organ:        将审判人员数据和法院数据合并
 judge_out_info:     清洗审判人员的详细信息，能够直接放入到pg_user_judge表中
+JudgeInfoResult:    将清洗好的审判人员添加id
+JudgeRelationAddId: 将映射关系添加id
+
 
 合并档案：
 juege_merge:        合并审判人员档案
-
 
 
 过期：
