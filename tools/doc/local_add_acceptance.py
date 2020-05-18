@@ -56,8 +56,8 @@ docAcceptCossPat = re.compile(r'.*受理费[用]?[:：]?(.*)元.*')
 accept_cost_pat = re.compile(r'受理费[费本院实际全额依法预缴应收用共计由已因适用按简易普通程序（(减半)收取）计算后交缴纳征收取计即为合计人民币元各到]{0,20}(\d+(\.\d+)?[万]?)[元减半收取0-9]{0,10}[元]?')
 rescue_cost_pat = re.compile(r'保全费(\d+(\.\d+)?)元')
 # judgmemt = '案件受理费2935元，由被告童某某、江西宜春汽车运输股份有限公司高安分公司承担'
-file_in = open('D:\\doc_data\\region_data_out\\000355_0_new1', 'r', encoding='utf-8')
-file_out = open('D:\\doc_data\\region_data_out\\000355_0_new3', 'w', encoding='utf-8')
+file_in = open('D:\\cause_data\\organ_data\\xh', 'r', encoding='utf-8')
+file_out = open('D:\\acceptcost_data\\out', 'w', encoding='utf-8')
 
 # 检测是否有受理费，并返回
 def get_accept_cost(line):

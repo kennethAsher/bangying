@@ -8,6 +8,6 @@
 
 
 ''':arg
-InsertPguserjudge:    将清洗好的审判人员数据存放至test环境中的test_pg_user_judge_ken表中
+InsertJudgeRelation:  将文件内容上传至mysql中的关系映射表：judge_map
 InsertJudgerelation:  将清洗好的审判人员映射关系存放之test环境中的judge_map表中
 '''

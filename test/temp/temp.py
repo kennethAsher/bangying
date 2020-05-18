@@ -9,7 +9,7 @@
 
 import re
 import jieba
-
+'''
 plaintiff_lawsuit_pat = re.compile(r'.*(原审原告|原告人|原告|上诉人|申诉人|再审申请人|申请人|申请执行人|异议人|起诉人|申报人|原审第三人|第三人).*(诉讼|请求|诉请|诉称).*')
 # 被告诉求
 appellee_lawsuit_pat = re.compile(r'.*((原审被告|被告人|被告|被上诉人|被申诉人|申请再审人|被申请人|被执行人|被异议人)|一审法院).*(答辩|反诉|诉讼|请求|诉请|诉称|认为).*')
@@ -43,7 +43,6 @@ if read_flag == 2:
 # line = '原告赵某向本院提出诉讼请求：'
 # print(plaintiff_lawsuit_pat.findall(line))
 
-# line = '鉴定费1500.00元'
-# out = jieba.lcut(line)
-# print(out)
-    '''
+line = '鉴定费1500.00元'
+out = jieba.lcut(line)
+print(out)

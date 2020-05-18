@@ -18,7 +18,7 @@ logging.basicConfig(filename='../../../log/mysql/demo/demo2.log',
 
 class demo2():
     def __init__(self):
-        self.file_path = 'C:\\Users\\GG257\\OneDrive\\sublime\\帮瀛\\pg_data\\new_pg_court.txt'
+        self.file_path = 'C:\\Users\\GG257\\OneDrive\\sublime\\帮瀛\\pg_data\\pg_court\\new_court_map.txt'
         self.conn = pymysql.connect(host='rm-2zet9m2x33kh23506o.mysql.rds.aliyuncs.com',
                                user='pg_db',
                                password='ds930$232aH!@#FD',
