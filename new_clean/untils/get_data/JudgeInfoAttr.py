@@ -16,6 +16,7 @@ docid|title|court|province|city|area|court_level|docnum|year|date|trail|doctype|
 92d0ca7a-89e9-4b45-b848-a93300e8741f|中国太平洋财产保险股份有限公司永康支公司与陈华雄保险人代位求偿权纠纷一审民事裁定书|浙江省永康市人民法院|浙江省|金华市|永康市|基层|(2018)浙0784民初4511号|2019||一审|民事案件|民事裁定书|张镇|浙江从周律师事务所|审判员-施红敏,书记员-李晟洁|徐华军-浙江从周律师事务所||保险人代位求偿权纠纷|原告-中国太平洋财产保险股份有限公司永康支公司-非上市民营,被告-陈华雄-个人
 
 写出审判人员数据，
+注意需要过滤掉书记员，我们mysql的数据库中没有过滤掉书记员
 
 """
 
@@ -60,9 +61,12 @@ class JudgeInfoAttr():
     def get_fields(self, line):
         return line.strip().split('|')
 
-    # 从审判人员关系列中返回合作的审判人员
+    # 从审判人员关系列中返回合作的审判人员，并且去掉其中的书记员
     def get_judges(self, judge, judges):
         judges_list = judges.split(',')
+        for name in judges_list:
+            if '书记' in name:
+                judges_list.pop(judges_list.index(name))
         judges_list.pop(judges_list.index(judge))
         return judges_list
 
@@ -135,6 +139,8 @@ class JudgeInfoAttr():
                     else:
                         continue
                     for judge in judges:
+                        if '书记' in judge:
+                            break
                         if '-' in judge:
                             judge_name = judge.split('-')[1]
                         else:
@@ -174,10 +180,11 @@ class JudgeInfoAttr():
                         # 添加关联法官
                         if ',' in fields[15]:
                             friends_judges = self.get_judges(judge, fields[15])
-                            for friends_judge in friends_judges:
-                                judge_name = friends_judge.split('-')[1]
-                                friend_judge = judge_name+'-'+fields[2]
-                                self.insert_mapping(key, friend_judge, self.judge_friend_judge_mapping)
+                            if len(friends_judges)>0:
+                                for friends_judge in friends_judges:
+                                    judge_name = friends_judge.split('-')[1]
+                                    friend_judge = judge_name+'-'+fields[2]
+                                    self.insert_mapping(key, friend_judge, self.judge_friend_judge_mapping)
             add_result_open.close()
 
     # 写出最终的judge_info_attr数据
@@ -195,6 +202,8 @@ class JudgeInfoAttr():
                     else:
                         continue
                     for judge in judges:
+                        if '书记' in judge:
+                            break
                         if '-' in judge:
                             judge_name = judge.split('-')[1]
                         else:
@@ -281,4 +290,8 @@ if len(trail) > 1:
 
     else:
         self.judge_trail_mapping[key] = trail + '-1'
+        
+        
+        
+2607773302
 '''

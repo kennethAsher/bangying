@@ -7,11 +7,11 @@
 # @Content : 将清洗计算好的judge数据存放至es的pg_judge_info_ken表中
 '''
 
-# from elasticsearch import Elasticsearch
-# from elasticsearch import helpers
-# es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'],
-#                    http_auth=('elastic','TytxsP^tr!BvCayo'),
-#                    port=9200)
+from elasticsearch import Elasticsearch
+from elasticsearch import helpers
+es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'],
+                   http_auth=('elastic','TytxsP^tr!BvCayo'),
+                   port=9200)
 
 def load_data(lines, path):
     print('loading... file')
@@ -29,7 +29,6 @@ def batch_data(lines,k):
             if len(lines) == 0:
                 break
             the_lines.append(lines.pop(0))
-        print(the_lines)
         action = ({
             "_index": "test_pg_judge_info_ken",
             "_type": "doc",
@@ -45,9 +44,8 @@ def batch_data(lines,k):
                 "court_proceeding_type":fields[8].replace('-','|')
             }
         } for fields in the_lines)
-        # helpers.bulk(es, action)
+        helpers.bulk(es, action)
         k +=1000
-
         print('传输了{}条'.format(k))
 
 if __name__ == '__main__':

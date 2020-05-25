@@ -7,12 +7,5 @@
 # @Content : 开始整那些标的额啦
 '''
 
-import requests
-from urllib.parse import urlencode
-
-
-
-
-lst = ['zhangsan','lisi','wangmazi']
-lst.remove(lst.index('lisi'))
-print(lst)
+import re
+print(int(''))

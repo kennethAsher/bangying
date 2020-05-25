@@ -1,3 +1,6 @@
+# !/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 """
 @author : kennethAsher
 @fole   : es_insert_ws_judgecase.py
@@ -15,8 +18,8 @@ es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyunc
                    port=9200)
 
 
-path = '/mnt/disk1/data/untils_data/judge_data/ws_judgecase/'
-# path = 'D:\\es_data\\ws_judgecase\\'
+path = '/mnt/disk1/data/untils_data/judge_data/ws_judgecase_ext/'
+# path = 'D:\\es_data\\ws_judgecase_ext\\'
 names = os.listdir(path)
 lst = []
 for name in names:
@@ -50,19 +53,38 @@ for name in names:
                     lawyers = fields[15].split(',')
                     for l in lawyers:
                         lawyer_list.append({'name':l.split('-')[0], 'office':l.split('-')[1]})
+            except:
+                lawyer_list = []
+            try:
                 judge_list = []
                 if len(fields[16])>2:
                     judges = fields[16].split(',')
                     for j in judges:
                         judge_list.append(j.split('-')[-1])
-            except :
-                flag -= 1
-                continue
-            lst.append([_id,judge_name,judge_status,person_cnt,company_cnt, court, courtlevel,docid, casereason,casetype, doctype, trialprocedure,judgeyear,judgemonth,judgedate,lawyer_list,judge_list])
+            except:
+                judge_list = []
+            try:
+                person_list = []
+                if len(fields[17])>1:
+                    persons = fields[17][1:].strip().split(',')
+                    for p in persons:
+                        person_list.append({'name':p.split('-')[1], 'status':p.split('-')[0]})
+            except:
+                person_list = []
+            try:
+                company_list = []
+                if len(fields[18]) > 1:
+                    companies = fields[18][1:].strip().split(',')
+                    for c in companies:
+                        company_list.append({'name':c.split('-')[1], 'status':c.split('-')[0]})
+            except:
+                company_list = []
+
+            lst.append([_id,judge_name,judge_status,person_cnt,company_cnt, court, courtlevel,docid, casereason,casetype, doctype, trialprocedure,judgeyear,judgemonth,judgedate,lawyer_list,judge_list,person_list,company_list])
             if len(lst)>999 or k-1 == step:
                 # print(lst)
                 action = ({
-                    "_index": "test_ws_judgecase_ken",
+                    "_index": "test_ws_judgecase_ext_ken",
                     "_type": "doc",
                     "_source": {
                         "id": lst_line[0],
@@ -81,7 +103,9 @@ for name in names:
                         "judgemonth": lst_line[13],
                         "judgetime": lst_line[14],
                         "lawyers": lst_line[15],
-                        "partners":lst_line[16]
+                        "partners":lst_line[16],
+                        "persons":lst_line[17],
+                        "companies": lst_line[18]
                     }
                 } for lst_line in lst)
                 try:

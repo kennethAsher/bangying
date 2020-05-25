@@ -16,8 +16,10 @@ es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyunc
 path = r'D:\judge_info_attr'
 with open(path, 'r', encoding='utf8') as judge_info_attr_file:
     lst = []
+    lines = judge_info_attr_file.readlines()
+    k = len(lines)
     flag = 0
-    for line in judge_info_attr_file.readlines():
+    for step,line in enumerate(lines):
         flag += 1
         fields = line.strip().split('|')
         judge_id = int(fields[2])
@@ -52,7 +54,7 @@ with open(path, 'r', encoding='utf8') as judge_info_attr_file:
                 words = judge.split('-')
                 lst.append([judge_id, judge_name, court_name, 'COOPERATE_JUDGE', '合作法官', words[0],words[1], all_cnt, int(words[-1])])
 
-        if len(lst)>1000:
+        if len(lst)>1000 or k-1 == step:
             action = ({
                 "_index": "test_pg_judge_info_attr_ken",
                 "_type": "doc",
