@@ -31,7 +31,6 @@ for name in names:
         for step,line in enumerate(lines):
             flag += 1
             fields = line.strip().split('|')
-
             _id = int(fields[0])
             judge_name = fields[1]
             judge_status = fields[2]
