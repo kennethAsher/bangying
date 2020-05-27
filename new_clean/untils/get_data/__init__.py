@@ -10,6 +10,6 @@
 JudgeInfoAttr:   整理出来judgeinfoattr所需要的数据
 MergeJudgeInfoAttr: 将两份judgeinfoattr数据进行合并
 
-
+WsLawyerCase:从原始数据中拿到lawyercase表所需要的字段
 
 '''
