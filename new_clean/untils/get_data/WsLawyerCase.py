@@ -59,13 +59,19 @@ class LawyerCase():
                         if fields[0] in self.plaintiff_mapping:
                             if fields[5] != flag_str:
                                 flag = 0
-                            out = str(flag) + '|' + fields[1] + '|' + fields[2] + '|' + fields[4] + '|' + fields[5]
-                            self.plaintiff_mapping[fields[0]] = self.plaintiff_mapping[fields[0]]+'=='+out
+                            key = fields[1]+'-'+fields[2]
+                            if key in self.lawyer_id_mapping:
+                                lawyer_id = self.lawyer_id_mapping[key]
+                                out = str(flag) +'|'+lawyer_id+ '|' + fields[1] + '|' + fields[2] + '|' + fields[4] + '|' + fields[5]
+                                self.plaintiff_mapping[fields[0]] = self.plaintiff_mapping[fields[0]]+'=='+out
                         else:
-                            out = str(flag) + '|' + fields[1] + '|' + fields[2] + '|' + fields[4] + '|' + fields[5]
-                            self.plaintiff_mapping[fields[0]] = out
-                            flag = 1
-                            flag_str = fields[5]
+                            key = fields[1] + '-' + fields[2]
+                            if key in self.lawyer_id_mapping:
+                                lawyer_id = self.lawyer_id_mapping[key]
+                                out = str(flag) +'|'+lawyer_id+ '|' + fields[1] + '|' + fields[2] + '|' + fields[4] + '|' + fields[5]
+                                self.plaintiff_mapping[fields[0]] = out
+                                flag = 1
+                                flag_str = fields[5]
             file_in.close()
         logging.info('ending write data to friend_opponent_mapping')
 
