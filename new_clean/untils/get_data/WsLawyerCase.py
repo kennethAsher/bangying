@@ -12,6 +12,7 @@
 import os
 import logging
 
+
 logging.basicConfig(filename='/mnt/disk1/log/python/untils/get_data/ws_lawyercase.log',
                     filemode="w",
                     format="%(asctime)s %(name)s:%(levelname)s:%(message)s",
