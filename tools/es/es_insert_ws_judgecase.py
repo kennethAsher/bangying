@@ -92,3 +92,4 @@ for name in names:
                 lst = []
         file_open.close()
         print('上传完成{}'.format(name))
+print('任务执行完成')

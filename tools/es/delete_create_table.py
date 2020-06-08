@@ -11,10 +11,10 @@ from elasticsearch import Elasticsearch
 es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'], http_auth=('elastic','TytxsP^tr!BvCayo') ,port=9200)
 
 # 删除
-result = es.indices.delete(index='test_pg_lawyer_info_attr_ken', ignore=[400, 404])
+result = es.indices.delete(index='test_pg_ws_lawyercase_ken', ignore=[400, 404])
 print(result)
 # 创建
-result = es.indices.create(index='test_pg_lawyer_info_attr_ken', ignore=400)
+result = es.indices.create(index='test_pg_ws_lawyercase_ken', ignore=400)
 print(result)
 
 
@@ -70,13 +70,13 @@ print(result)
 #     print(result)
 
 #查询：查询所有
-# result = es.search(index='news', doc_type='politics')
+# result = es.search(index='test_pg_ws_lawyercase_ken', doc_type='politics')
 #通过全文检索
-# dsl = {'query':{'match':{'title':'中国 领事馆'}}}
-# result = es.search(index='news', doc_type='politics', body=dsl)
+# dsl = {'query':{'match':{'docid':'aef6203d-370e-4247-9979-a86500962ded'}}}
+# result = es.search(index='test_pg_ws_lawyercase_ken', doc_type='doc', body=dsl)
 # print(result)
 
-#查询某个字段的所有
+# 查询某个字段的所有
 # dsl = { "_source":"docid"}
 # query = es.search(index='pg_ws_parsed', body=dsl, scroll='5m',size=100)
 # results = query['hits']['hits'] # es查询出的结果第一页
