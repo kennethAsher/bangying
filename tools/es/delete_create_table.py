@@ -10,14 +10,30 @@ from elasticsearch import Elasticsearch
 
 es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'], http_auth=('elastic','TytxsP^tr!BvCayo') ,port=9200)
 
-# 删除
-result = es.indices.delete(index='test_pg_lawyer_info_attr_ken', ignore=[400, 404])
-print(result)
-# 创建
-result = es.indices.create(index='test_pg_lawyer_info_attr_ken', ignore=400)
-print(result)
+# # 删除
+# result = es.indices.delete(index='test_pg_lawyer_info_attr_ken', ignore=[400, 404])
+# print(result)
+# # 创建
+# result = es.indices.create(index='test_pg_lawyer_info_attr_ken', ignore=400)
+# print(result)
 
 
+mapping = {
+    'properties':{
+        'companies':{
+            'type': 'nested'
+        },
+        'persons':{
+            'type': 'nested'
+        },
+        'lawyers':{
+            'type': 'nested'
+        }
+    }
+}
+es.indices.delete(index='test_pg_ws_judgecase_ext_ken', ignore=[400, 404])
+es.indices.create(index='test_pg_ws_judgecase_ext_ken', ignore=400)
+result = es.indices.put_mapping(index='test_pg_ws_judgecase_ext_ken', doc_type='doc', body=mapping)
 
 #ignore 如果报此类错误的话，不会终止程序
 # 创建
