@@ -16,7 +16,11 @@ case_party：主要功能是在裁判文书中筛选出来案由和当事人。
 clean_lawyer_judege: 主要功能是筛选出裁判文书中的律师和审判人员，
 内容遍历三次，第一次，找到审判人员，第二次找到合作律师和对手律师，第三次遍历律师并去重然后写出           
             
-            
+clean_acceptcost:    清洗标的额和受理费
+
+cleanPublicEcpense:  清洗官费
+
+clean_test:          清洗原告，被告诉求，以及法院判决
             
             
             
