@@ -8,7 +8,9 @@
 
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'], http_auth=('elastic','TytxsP^tr!BvCayo') ,port=9200)
+es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'],
+                   http_auth=('elastic','TytxsP^tr!BvCayo'),
+                   port=9200)
 
 # # 删除
 # result = es.indices.delete(index='test_pg_lawyer_info_attr_ken', ignore=[400, 404])
@@ -17,23 +19,34 @@ es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyunc
 # result = es.indices.create(index='test_pg_lawyer_info_attr_ken', ignore=400)
 # print(result)
 
+# 设置字段数据类型的新建表
+# mapping = {
+#      "properties":{
+#          "lawyers":{
+#             "type":"nested"
+#          }
+#      }
+#   }
+# es.indices.delete(index='test_pg_ws_judgecase_ken', ignore=[400, 404])
+# es.indices.create(index='test_pg_ws_judgecase_ken', ignore=400)
+# result = es.indices.put_mapping(index='test_pg_ws_judgecase_ken', doc_type='doc', body=mapping)
 
-mapping = {
-    'properties':{
-        'companies':{
-            'type': 'nested'
-        },
-        'persons':{
-            'type': 'nested'
-        },
-        'lawyers':{
-            'type': 'nested'
-        }
-    }
-}
-es.indices.delete(index='test_pg_ws_judgecase_ext_ken', ignore=[400, 404])
-es.indices.create(index='test_pg_ws_judgecase_ext_ken', ignore=400)
-result = es.indices.put_mapping(index='test_pg_ws_judgecase_ext_ken', doc_type='doc', body=mapping)
+# mapping = {
+#     'properties':{
+#         'companies':{
+#             'type': 'nested'
+#         },
+#         'persons':{
+#             'type': 'nested'
+#         },
+#         'lawyers':{
+#             'type': 'nested'
+#         }
+#     }
+# }
+# es.indices.delete(index='test_pg_ws_judgecase_ext_ken', ignore=[400, 404])
+# es.indices.create(index='test_pg_ws_judgecase_ext_ken', ignore=400)
+# result = es.indices.put_mapping(index='test_pg_ws_judgecase_ext_ken', doc_type='doc', body=mapping)
 
 #ignore 如果报此类错误的话，不会终止程序
 # 创建
@@ -62,6 +75,9 @@ result = es.indices.put_mapping(index='test_pg_ws_judgecase_ext_ken', doc_type='
 # result = es.delete(index='news', doc_type='politics', id=1)
 
 #测试
+result = es.delete(index='test_pg_judge_info_attr_ken', doc_type='doc', id='LiVEKHIBi5ZwVri2wJrh')
+print(result)
+#设置表的格式
 # mapping = {
 #     'properties':{
 #         'title':{
