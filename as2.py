@@ -65,3 +65,15 @@ es.indices.delete(index='test_1', ignore=[400, 404])
 # }
 # result = es.search(index='test_1', doc_type='doc', body=dsl)
 # print(result)
+import os
+
+
+path = '/mnt/disk1/data/untils_data/lawyer_data/ws_lawyercase/'
+names = os.listdir(path)
+k = 0
+for name in names:
+    with open('{}{}'.format(path, name), 'r', encoding='utf8') as file_in:
+        for line in file_in.readlines():
+            k+=1
+
+print(k)

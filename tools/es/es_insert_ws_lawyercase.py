@@ -136,6 +136,7 @@ for name in names:
                         "province": lst_line[14],
                         "city": lst_line[15],
                         "region": lst_line[16],
+
                         "partystatus": lst_line[17],
                         "partytype": lst_line[18],
                         "justices": lst_line[19]
