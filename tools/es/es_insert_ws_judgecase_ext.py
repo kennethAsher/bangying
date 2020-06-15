@@ -67,7 +67,7 @@ for name in names:
                 if len(fields[17])>1:
                     persons = fields[17][1:].strip().split(',')
                     for p in persons:
-                        person_list.append({'name':p.split('-')[1], 'status':p.split('-')[0]})
+                        person_list.append({'name':p.split('-')[1],'iscompany':'flase','lawyer':'[]','statuscode':'SSR','status':p.split('-')[0]})
             except:
                 person_list = []
             try:
@@ -75,7 +75,7 @@ for name in names:
                 if len(fields[18]) > 1:
                     companies = fields[18][1:].strip().split(',')
                     for c in companies:
-                        company_list.append({'name':c.split('-')[1], 'status':c.split('-')[0]})
+                        company_list.append({'name':c.split('-')[1],'iscompany':'flase','lawyer':'[]','statuscode':'SSR','status':c.split('-')[0]})
             except:
                 company_list = []
 
@@ -83,7 +83,7 @@ for name in names:
             if len(lst)>999 or k-1 == step:
                 # print(lst)
                 action = ({
-                    "_index": "test_ws_judgecase_ext_ken",
+                    "_index": "test_pg_ws_judgecase_ext_ken",
                     "_type": "doc",
                     "_source": {
                         "id": lst_line[0],
