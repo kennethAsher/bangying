@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8e8d56b1-677a-4436-9c77-1300fa876bdf" name="Default Changelist" comment="在我的苹果电脑上面大更新一次">
+      <change afterPath="$PROJECT_DIR$/new_clean/民事/CleanPublicExpense.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/es/es_insert_ws_judgecase_ext.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/es/es_insert_ws_judgecase_ext.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/bangying$insert_lawyer_score.coverage" NAME="insert_lawyer_score Coverage Results" MODIFIED="1582522317060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/mysql" />
+    <SUITE FILE_PATH="coverage/bangying$merge_caseinfo.coverage" NAME="merge_caseinfo Coverage Results" MODIFIED="1581313981412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/score_count" />
+    <SUITE FILE_PATH="coverage/bangying$truncate_lawyer.coverage" NAME="truncate_lawyer Coverage Results" MODIFIED="1583409065555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/doc/opponent_lawyer" />
+    <SUITE FILE_PATH="coverage/bangying$get_lawyer_message.coverage" NAME="get_lawyer_message Coverage Results" MODIFIED="1584541374337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/mysql" />
+    <SUITE FILE_PATH="coverage/bangying$opponent_count.coverage" NAME="opponent_count Coverage Results" MODIFIED="1583402714430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/doc/opponent_lawyer" />
+    <SUITE FILE_PATH="coverage/bangying$num_count.coverage" NAME="num_count Coverage Results" MODIFIED="1582804810181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/score_count" />
+    <SUITE FILE_PATH="coverage/bangying$merge_court.coverage" NAME="merge_court Coverage Results" MODIFIED="1581313242958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/score_count" />
+    <SUITE FILE_PATH="coverage/bangying$demo__1_.coverage" NAME="demo (1) Coverage Results" MODIFIED="1584632209039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/es/mysql_es" />
+    <SUITE FILE_PATH="coverage/bangying$demo.coverage" NAME="demo Coverage Results" MODIFIED="1584539209202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/正则" />
+    <SUITE FILE_PATH="coverage/bangying$doc_clean_to_lawyer.coverage" NAME="doc_clean_to_lawyer Coverage Results" MODIFIED="1582602481671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/doc" />
+    <SUITE FILE_PATH="coverage/bangying$court_demo.coverage" NAME="court_demo Coverage Results" MODIFIED="1583899944378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/bangying$hello.coverage" NAME="hello Coverage Results" MODIFIED="1576685206668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bangying$doc_add_parties.coverage" NAME="doc_add_parties Coverage Results" MODIFIED="1582255032693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/doc" />
+    <SUITE FILE_PATH="coverage/bangying$write_opponent.coverage" NAME="write_opponent Coverage Results" MODIFIED="1583313278125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/doc/opponent_lawyer" />
+    <SUITE FILE_PATH="coverage/bangying$as.coverage" NAME="as Coverage Results" MODIFIED="1583897564882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bangying$delete_create_table.coverage" NAME="delete_create_table Coverage Results" MODIFIED="1591617381718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/es" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="bangying" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="delete_create_table.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/es/delete_create_table.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="es_insert_ws_judgecase_ext.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_judgecase_ext.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1134">
+              <caret line="106" column="49" lean-forward="true" selection-start-line="106" selection-start-column="49" selection-end-line="106" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="as2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/as2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="as.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/as.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="834">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clean_acceptcost.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/new_clean/民事/clean_acceptcost.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2545" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clean_text.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/new_clean/民事/clean_text.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="clean_lawyer_judge.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/new_clean/民事/clean_lawyer_judge.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="merge_lawyer_add.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/new_clean/民事/merge_lawyer_add.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/new_clean/民事/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="CleanPublicExpense.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/new_clean/民事/CleanPublicExpense.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/tools/es/es_insert_ws_lawyercase.py" />
+        <option value="$PROJECT_DIR$/tools/es/es_insert_ws_judgecase.py" />
+        <option value="$PROJECT_DIR$/tools/es/es_insert_ws_judgecase_ext.py" />
+        <option value="$PROJECT_DIR$/tools/es/delete_create_table.py" />
+        <option value="$PROJECT_DIR$/new_clean/民事/CleanPublicExpense.py" />
+      </list>
+    </option>
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\GG257\OneDrive\pycharm\bangying\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="1680" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectId" id="1UPF86nqxuwK0ezDhCBz5a4Zwcp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="bangying" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bangying" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bangying" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bangying" type="462c0819:PsiDirectoryNode" />
+              <item name="new_clean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bangying" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bangying" type="462c0819:PsiDirectoryNode" />
+              <item name="new_clean" type="462c0819:PsiDirectoryNode" />
+              <item name="民事" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bangying" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bangying" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/as2.py" />
+  </component>
+  <component name="PyDebuggerOptionsProvider">
+    <option name="mySupportQtDebugging" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\new_clean\untils" />
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\tools\es" />
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\new_clean\untils\judge_untils" />
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\new_clean\untils\judge_untils\judge_merge" />
+      <recent name="$PROJECT_DIR$/new_clean" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\tools\mysql\demo" />
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\tools\es" />
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying" />
+      <recent name="C:\Users\GG257\OneDrive\pycharm\bangying\new_clean\untils\judge_untils\judge_merge" />
+      <recent name="$PROJECT_DIR$/test/temp" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.delete_create_table">
+    <configuration name="as2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bangying" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/as2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="delete_create_table" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bangying" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools/es" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/es/delete_create_table.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="demo4" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bangying" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools/mysql/demo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/mysql/demo/demo4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="demo4_help" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bangying" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools/mysql/demo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/mysql/demo/demo4_help.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="es_insert_ws_judgecase_ext" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bangying" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools/es" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/es/es_insert_ws_judgecase_ext.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.as2" />
+      <item itemvalue="Python.delete_create_table" />
+      <item itemvalue="Python.es_insert_ws_judgecase_ext" />
+      <item itemvalue="Python.demo4_help" />
+      <item itemvalue="Python.demo4" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.delete_create_table" />
+        <item itemvalue="Python.as2" />
+        <item itemvalue="Python.demo4" />
+        <item itemvalue="Python.demo4_help" />
+        <item itemvalue="Python.es_insert_ws_judgecase_ext" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8e8d56b1-677a-4436-9c77-1300fa876bdf" name="Default Changelist" comment="" />
+      <created>1575250160593</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575250160593</updated>
+      <workItem from="1585041386589" duration="615000" />
+      <workItem from="1585046829168" duration="18387000" />
+      <workItem from="1585274320849" duration="10504000" />
+      <workItem from="1585538387160" duration="8309000" />
+      <workItem from="1585557821096" duration="26604000" />
+      <workItem from="1585795004104" duration="16658000" />
+      <workItem from="1586843590489" duration="341000" />
+      <workItem from="1586919375789" duration="10991000" />
+      <workItem from="1587037978178" duration="104000" />
+      <workItem from="1587346601316" duration="7316000" />
+    </task>
+    <task id="LOCAL-00001" summary="第一次操作，上传文件">
+      <created>1576462968626</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576462968626</updated>
+    </task>
+    <task id="LOCAL-00002" summary="本地测试">
+      <created>1576685229016</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576685229016</updated>
+    </task>
+    <task id="LOCAL-00003" summary="更新调试pyspark代码">
+      <created>1576720071797</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1576720071797</updated>
+    </task>
+    <task id="LOCAL-00004" summary="清洗律师代码">
+      <created>1576846385519</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1576846385519</updated>
+    </task>
+    <task id="LOCAL-00005" summary="测试版本更新">
+      <created>1578464730704</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578464730704</updated>
+    </task>
+    <task id="LOCAL-00006" summary="不知道为什么好多新东西啊">
+      <created>1587470042020</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587470042020</updated>
+    </task>
+    <task id="LOCAL-00007" summary="整合出律师数据">
+      <created>1587549231833</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587549231833</updated>
+    </task>
+    <task id="LOCAL-00008" summary="添加doc_id属性">
+      <created>1587608049678</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1587608049678</updated>
+    </task>
+    <task id="LOCAL-00009" summary="添加doc_id属性">
+      <created>1587608647676</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1587608647676</updated>
+    </task>
+    <task id="LOCAL-00010" summary="更新完成审判人员合并代码">
+      <created>1587979301515</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1587979301515</updated>
+    </task>
+    <task id="LOCAL-00011" summary="更新完成审判人员合并代码">
+      <created>1590387658365</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1590387658366</updated>
+    </task>
+    <task id="LOCAL-00012" summary="更新插入至es库中的lawyer_attr_ken表">
+      <created>1590493107048</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1590493107048</updated>
+    </task>
+    <task id="LOCAL-00013" summary="更新获得ws_lawyercase数据">
+      <created>1590569963534</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1590569963534</updated>
+    </task>
+    <task id="LOCAL-00014" summary="更新获得ws_lawyercase数据，">
+      <created>1590570044429</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1590570044429</updated>
+    </task>
+    <task id="LOCAL-00015" summary="更新补充律师id">
+      <created>1590573446314</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1590573446314</updated>
+    </task>
+    <task id="LOCAL-00016" summary="在我的苹果电脑上面大更新一次">
+      <created>1591583600967</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1591583600967</updated>
+    </task>
+    <task id="LOCAL-00017" summary="更新新建es库的同时设置字段类型">
+      <created>1591668215383</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1591668215383</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1680" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3299389" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21618743" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="第一次操作，上传文件" />
+    <MESSAGE value="本地测试" />
+    <MESSAGE value="更新调试pyspark代码" />
+    <MESSAGE value="清洗律师代码" />
+    <MESSAGE value="测试版本更新" />
+    <MESSAGE value="不知道为什么好多新东西啊" />
+    <MESSAGE value="整合出律师数据" />
+    <MESSAGE value="添加doc_id属性" />
+    <MESSAGE value="更新完成审判人员合并代码" />
+    <MESSAGE value="更新插入至es库中的lawyer_attr_ken表" />
+    <MESSAGE value="更新获得ws_lawyercase数据" />
+    <MESSAGE value="更新获得ws_lawyercase数据，" />
+    <MESSAGE value="更新补充律师id" />
+    <MESSAGE value="在我的苹果电脑上面大更新一次" />
+    <MESSAGE value="更新新建es库的同时设置字段类型" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新新建es库的同时设置字段类型" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="365" y="210" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586934865526">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="365" y="210" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800@0.0.1280.800" timestamp="1586934865526" />
+    <state x="223" y="0" width="833" height="800" key="CommitChangelistDialog2" timestamp="1586920234652">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="223" y="0" width="833" height="800" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1586920234652" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1587455866695">
+      <screen x="35" y="23" width="1245" height="777" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1587348535908" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/35.23.1245.777@35.23.1245.777" timestamp="1587455866695" />
+    <state width="1238" height="263" key="GridCell.Tab.0.bottom/48.23.1232.777@48.23.1232.777" timestamp="1585556896330" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1587455866693">
+      <screen x="35" y="23" width="1245" height="777" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1587348535906" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center/35.23.1245.777@35.23.1245.777" timestamp="1587455866693" />
+    <state width="1238" height="263" key="GridCell.Tab.0.center/48.23.1232.777@48.23.1232.777" timestamp="1585556896328" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1587455866692">
+      <screen x="35" y="23" width="1245" height="777" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1587348535905" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left/35.23.1245.777@35.23.1245.777" timestamp="1587455866692" />
+    <state width="1238" height="263" key="GridCell.Tab.0.left/48.23.1232.777@48.23.1232.777" timestamp="1585556896327" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1587455866694">
+      <screen x="35" y="23" width="1245" height="777" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1587348535907" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right/35.23.1245.777@35.23.1245.777" timestamp="1587455866694" />
+    <state width="1238" height="263" key="GridCell.Tab.0.right/48.23.1232.777@48.23.1232.777" timestamp="1585556896329" />
+    <state width="1238" height="407" key="GridCell.Tab.1.bottom" timestamp="1587036894827">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="407" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1587036894827" />
+    <state width="1238" height="263" key="GridCell.Tab.1.bottom/48.23.1232.777@48.23.1232.777" timestamp="1585556896341" />
+    <state width="1238" height="407" key="GridCell.Tab.1.center" timestamp="1587036894827">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="407" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1587036894827" />
+    <state width="1238" height="263" key="GridCell.Tab.1.center/48.23.1232.777@48.23.1232.777" timestamp="1585556896331" />
+    <state width="1238" height="407" key="GridCell.Tab.1.left" timestamp="1587036894826">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="407" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1587036894826" />
+    <state width="1238" height="263" key="GridCell.Tab.1.left/48.23.1232.777@48.23.1232.777" timestamp="1585556896330" />
+    <state width="1238" height="407" key="GridCell.Tab.1.right" timestamp="1587036894827">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="407" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1587036894827" />
+    <state width="1238" height="263" key="GridCell.Tab.1.right/48.23.1232.777@48.23.1232.777" timestamp="1585556896332" />
+    <state x="425" y="118" key="RollbackChangesDialog" timestamp="1585735658185">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="425" y="118" key="RollbackChangesDialog/0.0.1280.800@0.0.1280.800" timestamp="1585735658185" />
+    <state x="149" y="39" key="SettingsEditor" timestamp="1587346641615">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="149" y="39" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1587346641615" />
+    <state width="640" height="400" key="XDebugger.FullValuePopup" timestamp="1585634112432">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="640" height="400" key="XDebugger.FullValuePopup/0.0.1280.800@0.0.1280.800" timestamp="1585634112432" />
+    <state x="319" y="232" key="com.intellij.ide.util.TipDialog" timestamp="1587346602392">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="319" y="232" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1587346602392" />
+    <state x="341" y="68" key="com.intellij.ide.util.TipDialog/43.23.1237.777@43.23.1237.777" timestamp="1585795050424" />
+    <state x="355" y="248" key="com.intellij.ide.util.TipDialog/48.23.1232.777@48.23.1232.777" timestamp="1585538631472" />
+    <state x="309" y="1" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1585723755214">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="309" y="1" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800@0.0.1280.800" timestamp="1585723755214" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1585895072919">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1585895072919" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="split_move" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bangying$clean_court_demo.coverage" NAME="clean_court_demo Coverage Results" MODIFIED="1585282795595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/clean_doc" />
+    <SUITE FILE_PATH="coverage/bangying$cause_demo__1_.coverage" NAME="cause_demo (1) Coverage Results" MODIFIED="1585634869014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new_clean/clean_doc_mspjs" />
+    <SUITE FILE_PATH="coverage/bangying$demo3.coverage" NAME="demo3 Coverage Results" MODIFIED="1586946227544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools/mysql/demo" />
+    <SUITE FILE_PATH="coverage/bangying$temp.coverage" NAME="temp Coverage Results" MODIFIED="1585728541958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/temp" />
+    <SUITE FILE_PATH="coverage/bangying$cause_demo.coverage" NAME="cause_demo Coverage Results" MODIFIED="1585137028990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/cause" />
+    <SUITE FILE_PATH="coverage/bangying$clean_lawyer_judge.coverage" NAME="clean_lawyer_judge Coverage Results" MODIFIED="1585892789748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new_clean/clean_doc_mspjs" />
+    <SUITE FILE_PATH="coverage/bangying$local_demo.coverage" NAME="local_demo Coverage Results" MODIFIED="1585190666809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/cause" />
+    <SUITE FILE_PATH="coverage/bangying$demo.coverage" NAME="demo Coverage Results" MODIFIED="1585635847705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/bangying$court_demo.coverage" NAME="court_demo Coverage Results" MODIFIED="1585216739714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/clean_doc" />
+    <SUITE FILE_PATH="coverage/bangying$clean_text.coverage" NAME="clean_text Coverage Results" MODIFIED="1586843713119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new_clean/民事" />
+    <SUITE FILE_PATH="coverage/bangying$as2.coverage" NAME="as2 Coverage Results" MODIFIED="1587348519216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bangying$clean_cause_demo.coverage" NAME="clean_cause_demo Coverage Results" MODIFIED="1585635961538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new_clean/clean_doc_mspjs" />
+    <SUITE FILE_PATH="coverage/bangying$as.coverage" NAME="as Coverage Results" MODIFIED="1585897308091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_lawyercase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2304">
+          <caret line="98" column="2" selection-start-line="98" selection-start-column="2" selection-end-line="98" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_judgecase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_lawyercase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2304">
+          <caret line="98" column="2" selection-start-line="98" selection-start-column="2" selection-end-line="98" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_judgecase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_lawyercase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="98" column="2" selection-start-line="98" selection-start-column="2" selection-end-line="98" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_judgecase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/as2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/delete_create_table.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/es/es_insert_ws_judgecase_ext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="106" column="49" lean-forward="true" selection-start-line="106" selection-start-column="49" selection-end-line="106" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_clean/民事/clean_acceptcost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2545" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_clean/民事/clean_text.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_clean/民事/clean_lawyer_judge.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_clean/民事/merge_lawyer_add.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_clean/民事/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/as.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="834">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/new_clean/民事/CleanPublicExpense.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

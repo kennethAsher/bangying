@@ -30,6 +30,8 @@ appellee_lawsuit_pat = re.compile(r'((原审被告|被告人|被告|被上诉人
 # 法院认为中断
 court_end_pat = re.compile(r'.*本院认为.*')
 # 法院判决
+# 依照《中华人民共和国民事诉讼法》第二十三条、第一百二十七条第一款规定，裁定如下：
+
 court_lawsuit_pat = re.compile(r'.*(判决如下|裁决如下|裁定如下).*')
 # 审判人员
 justicePatterns = re.compile(r'^((代理)?审判长)[:：]?(.*)'

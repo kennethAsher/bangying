@@ -10,70 +10,14 @@
 import re
 import os
 from elasticsearch import Elasticsearch
+import re
 
-es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyuncs.com'], http_auth=('elastic','TytxsP^tr!BvCayo') ,port=9200)
+file_open = open('/Users/kenneth-mac/data/test/zagk', 'r', encoding='utf8')
+file_write = open('/Users/kenneth-mac/data/test/zagk_out', 'w', encoding='utf8')
 
-mapping = {
-	     "properties":{
-		     "comments":{
-			    "type":"nested"
-			 }
-		 }
-  }
-es.indices.delete(index='test_1', ignore=[400, 404])
-# es.indices.create(index='test_1', ignore=400)
-# result = es.indices.put_mapping(index='test_1', doc_type='doc', body=mapping)
-# print(result)
-
-
-#
-# data = {
-#   "title":"Nest eggs",
-#   "body":  "Making your money work...",
-#   "tags":  [ "cash", "shares" ],
-#   "comments":[
-#      {
-# 	  "name":    "John Smith",
-#       "comment": "Great article",
-#       "age":     28,
-#       "stars":   4,
-#       "date":    "2014-09-01"
-# 	 },
-# 	 {
-#       "name":    "Alice White",
-#       "comment": "More like this please",
-#       "age":     31,
-#       "stars":   5,
-#       "date":    "2014-10-22"
-#      }
-#   ]
-# }
-# es.index(index='test_1', doc_type='doc', body=data)
-
-
-
-#通过全文检索
-# dsl = {
-#     'query':{
-#         "bool":{
-#             "must":[
-#                 {"match":{"comments.name":"Alice"}},
-#                 {"match":{"comments.age":28}}
-#             ]
-#         }
-#     }
-# }
-# result = es.search(index='test_1', doc_type='doc', body=dsl)
-# print(result)
-import os
-
-
-path = '/mnt/disk1/data/untils_data/lawyer_data/ws_lawyercase/'
-names = os.listdir(path)
-k = 0
-for name in names:
-    with open('{}{}'.format(path, name), 'r', encoding='utf8') as file_in:
-        for line in file_in.readlines():
-            k+=1
-
-print(k)
+for line in file_open.readlines():
+    fields = line.strip().split('|')
+    if 50>len(fields[3])>1:
+        file_write.write(fields[0]+'|'+fields[3]+'\n')
+file_open.close()
+file_write.close()
