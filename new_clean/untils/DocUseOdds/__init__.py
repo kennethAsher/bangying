@@ -6,7 +6,7 @@
 @contact: 1131771202@qq.com
 @file: __init__.py.py
 @time: 2020/7/6 3:38 下午
-@desc: 获取胜诉率
+@desc: 获取文案采用率
 '''
 
 """
