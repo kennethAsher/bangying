@@ -14,10 +14,10 @@ import re
 import os
 import logging
 
-logging.basicConfig(filename='/Users/kenneth-mac/OneDrive/pycharm/bangying/log/clean_oc/民事/clean_text.log',
+logging.basicConfig(filename='/log/clean_oc/民事/clean_text.log',
                     filemode="w",
                     format="%(asctime)s %(name)s:%(levelname)s:%(message)s",
-                    datefmt="%d-%M-%Y %H:%M:%S",level=logging.INFO)
+                    datefmt="%d-%M-%Y %H:%M:%S", level=logging.INFO)
 
 docSplitPat = re.compile(r'。')
 htmlRemovePat = re.compile('>(.*?)<')
@@ -61,6 +61,7 @@ def write_lawyer_judge(open_dir, write_dir):
         plaintiff_lawsuit = ''
         appellee_lawsuit = ''
         court_lawsuit = ''
+        court_think = ''
         #因为提取的时候将换行替换成了了'。'，所以在文书可能连续出现多个句号，此处需要将这些替换掉
         line = htmlRemovePat.sub('', line)
         line = line.replace('。。。。。', '').replace('。。。。', '').replace('。。。', '').replace('。。', '').replace('\n','')
