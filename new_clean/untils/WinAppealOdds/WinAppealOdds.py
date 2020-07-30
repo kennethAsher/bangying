@@ -30,6 +30,8 @@ class SplitAppealType():
         self.output_path = '/mnt/disk1/data/minshi/appeal_win_odds/'
         # 官费输入路径，此刻做金额类使用
         self.win_input_path = '/mnt/disk1/data/minshi/public_expense/'
+        # 文案采用率输入路径
+        self.doc_use_path = '/mnt/disk1/data/minshi/doc_use_odds/'
 
         # 金额胜诉率的mapping
         self.win_mapping = {}
@@ -107,6 +109,9 @@ class SplitAppealType():
                     if doc_id in self.win_mapping:
                         file_out.write(doc_id + '|' + self.win_mapping[doc_id] + '\n')
                         continue
+
+                    # 判断是否符合没有金额比例（使用文案采用率代替胜诉率）
+
 
     # 启动入口
     def run(self):
