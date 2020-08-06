@@ -20,16 +20,16 @@ es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyunc
 # print(result)
 
 # 设置字段数据类型的新建表
-# mapping = {
-#      "properties":{
-#          "lawyers":{
-#             "type":"nested"
-#          }
-#      }
-#   }
-# es.indices.delete(index='test_pg_ws_judgecase_ken', ignore=[400, 404])
-# es.indices.create(index='test_pg_ws_judgecase_ken', ignore=400)
-# result = es.indices.put_mapping(index='test_pg_ws_judgecase_ken', doc_type='doc', body=mapping)
+mapping = {
+     "properties":{
+         "justices":{
+            "type":"nested"
+         }
+     }
+  }
+es.indices.delete(index='test_pg_ws_parsed_ken', ignore=[400, 404])
+es.indices.create(index='test_pg_ws_parsed_ken', ignore=400)
+result = es.indices.put_mapping(index='test_pg_ws_parsed_ken', doc_type='doc', body=mapping)
 
 # mapping = {
 #     'properties':{
@@ -75,8 +75,8 @@ es = Elasticsearch(['http://es-cn-0pp14imrb00093moi.public.elasticsearch.aliyunc
 # result = es.delete(index='news', doc_type='politics', id=1)
 
 #测试
-result = es.delete(index='test_pg_judge_info_attr_ken', doc_type='doc', id='LiVEKHIBi5ZwVri2wJrh')
-print(result)
+# result = es.delete(index='test_pg_judge_info_attr_ken', doc_type='doc', id='LiVEKHIBi5ZwVri2wJrh')
+# print(result)
 #设置表的格式
 # mapping = {
 #     'properties':{
@@ -124,3 +124,48 @@ print(result)
 #     ln.add(hits['_source']['docid'])
 # for line in ln:
 #     file_out.write(line.strip()+'\n')
+
+#指定字段查询,从from开始，查询size个
+# query_json = {
+#     "from":0
+#     "size":100
+#     "_source": "lawyer_name"
+# }
+# query = es.search(index="pg_lawyer_info", body=query_json, size = 500)
+# # print(query)
+# sons = query["hits"]["hits"]
+# names = []
+# for hits in sons:
+#     names.append(len(hits["_source"]["lawyer_name"]))
+# print(names)
+
+#标尺查询大量数据
+'''
+page = es.search(
+    index="pg_company",
+    scroll ='2m',
+    # search_type ='scan',
+    size =10000,
+    body={"_source": "name"}
+
+)
+
+sid = page['_scroll_id']
+scroll_size = page['hits']['total']
+
+# Start scrolling
+while(scroll_size > 0):
+    names = []
+    # print(page)
+    for hits in page["hits"]["hits"]:
+        print(hits["_source"]["name"])
+    print(names)
+    # print(page)
+    time1=datetime.datetime.now()
+    page = es.scroll(scroll_id=sid, scroll='2m')
+    # Update the scroll ID
+    sid = page['_scroll_id']
+    # Get the number of results that we returned in the last scroll
+    scroll_size = len(page['hits']['hits'])
+    # print("scroll size: " + str(scroll_size),(datetime.datetime.now()-time1).microseconds)
+'''
