@@ -72,7 +72,7 @@ class AddType():
     # 将整理好的数据写入到文件中
     def write_party_type(self):
         file_open = open(self.party_path, 'r', encoding='utf8')
-        file_write = open(self.family_path, 'w', encoding='utf8')
+        file_write = open(self.family_path, 'r', encoding='utf8')
         for line in file_open.readlines():
             fields = self.get_fields(line)
             if len(fields[2]) > 1:
