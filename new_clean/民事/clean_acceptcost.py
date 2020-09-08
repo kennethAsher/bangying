@@ -55,7 +55,7 @@ doc_clean_pat = re.compile(r'。。|&#xa0;')
 docAcceptCossPat = re.compile(r'.*受理费[用]?[:：]?(.*)元.*')
 accept_cost_pat = re.compile(
     r'受理费[费本院实际全额依法预缴应收用共计由已因适用按简易普通程序（(减半)收取）计算后交缴纳征收取计即为合计人民币元各到]{0,20}(\d+(\.\d+)?[万]?)[元减半收取0-9]{0,10}[元]?')
-rescue_cost_pat = re.compile(r'保全费(\d+(\.\d+)?)元')
+# rescue_cost_pat = re.compile(r'保全费(\d+(\.\d+)?)元')
 # judgmemt = '案件受理费2935元，由被告童某某、江西宜春汽车运输股份有限公司高安分公司承担'
 class AcceptCost():
 
@@ -67,6 +67,7 @@ class AcceptCost():
 
     #根据受理费计算标的额
     def acceptCost_2_subjectCost(self, cost):
+
         if '空' in cost or cost == '':
             return '空'
         money = float(cost)
@@ -75,21 +76,21 @@ class AcceptCost():
         if money <= 2300:
             return round((money-50)/0.025 + 10000,2)
         if money <= 4300:
-            return round((money-2300)/0.02 + 100000)
+            return round((money-2300)/0.02 + 100000,2)
         if money <= 8800:
-            return round((money-4300)/0.015 + 200000)
+            return round((money-4300)/0.015 + 200000,2)
         if money <= 13800:
-            return round((money-8800)/0.01 + 500000)
+            return round((money-8800)/0.01 + 500000,2)
         if money <= 22800:
-            return round((money-13800)/0.009 + 1000000)
+            return round((money-13800)/0.009 + 1000000,2)
         if money <= 46800:
-            return round((money-22800)/0.008 + 2000000)
+            return round((money-22800)/0.008 + 2000000,2)
         if money <= 81800:
-            return round((money - 46800) / 0.007 + 5000000)
+            return round((money - 46800) / 0.007 + 5000000,2)
         if money <= 141800:
-            return round((money - 81800) / 0.006 + 10000000)
+            return round((money - 81800) / 0.006 + 10000000,2)
         if money > 141800:
-            return round((money - 141800) / 0.005 + 20000000)
+            return round((money - 141800) / 0.005 + 20000000,2)
 
     def get_names(self, path):
         return os.listdir(path)
