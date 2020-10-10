@@ -12,7 +12,7 @@ import re
 import os
 import logging
 
-logging.basicConfig(filename='/Users/by-webqianduan/OneDrive/pycharm/bangying/log/clean_oc/民事/clean_lawyer_judge.log',
+logging.basicConfig(filename='/Users/kenneth-mac/OneDrive/pycharm/bangying/log/clean_oc/民事/clean_lawyer_judge.log',
                     filemode="w",
                     format="%(asctime)s %(name)s:%(levelname)s:%(message)s",
                     datefmt="%d-%M-%Y %H:%M:%S",level=logging.INFO)
@@ -209,6 +209,6 @@ def run(open_dir, write_dir):
 
 
 if __name__ == '__main__':
-    open_dir = '/Users/by-webqianduan/data/organ_data/'
-    file_write = '/Users/by-webqianduan/data/lawyer_judge/lawyer_data'
+    open_dir = '/Users/kenneth-mac/work/organ_data/'
+    file_write = '/Users/kenneth-mac/work/lawyer_judge/lawyer_data'
     run(open_dir, file_write)
